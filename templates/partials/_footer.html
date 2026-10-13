@@ -1,0 +1,12 @@
+<footer class="pub-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5"><span class="logo logo-light"><span class="logo-mark">H</span><span class="logo-text"><strong>HIIT Support</strong><small>Student Support &amp; Issue Tracking</small></span></span>
+        <p class="mt-3">HIIT Plc's Student Support &amp; Issue Tracking System — helping students get the support they need, when they need it.</p></div>
+      <div class="col-6 col-lg-2"><h6>Product</h6><a href="{% url 'landing' %}#features">Features</a><a href="{% url 'landing' %}#how">How it works</a><a href="{% url 'login' %}">Sign In</a></div>
+      <div class="col-6 col-lg-2"><h6>Support</h6><a href="{% url 'info' 'help' %}">Help Center</a><a href="{% url 'info' 'contact' %}">Contact</a><a href="{% url 'info' 'faq' %}">FAQs</a></div>
+      <div class="col-12 col-lg-3"><h6>HIIT Plc</h6><a href="{% url 'info' 'about' %}">About HIIT Plc</a><a href="{% url 'info' 'training' %}">Training Programs</a><a href="{% url 'info' 'privacy' %}">Privacy</a></div>
+    </div>
+    <div class="foot-bottom"><span>&copy; {% now "Y" %} HIIT Plc. All rights reserved.</span><span>HIIT Support · Student Portal</span></div>
+  </div>
+</footer>

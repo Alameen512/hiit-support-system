@@ -1,0 +1,28 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}Staff Dashboard{% endblock %}
+{% block page_title %}Staff Dashboard{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Staff Dashboard</h1><p class="muted">Overview of all support issues.</p></div><a class="btn-hiit" href="{% url 'staff_issues' %}?status=open"><i class="bi bi-inboxes"></i> Review open issues</a></div>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-blue"><i class="bi bi-inboxes"></i></span><small>Total Issues</small><b>{{ counts.total }}</b></div></div>
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-amber"><i class="bi bi-exclamation-circle"></i></span><small>Open</small><b>{{ counts.open }}</b></div></div>
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-blue"><i class="bi bi-arrow-repeat"></i></span><small>In Progress</small><b>{{ counts.in_progress }}</b></div></div>
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-teal"><i class="bi bi-check-circle"></i></span><small>Resolved</small><b>{{ counts.resolved }}</b></div></div>
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-blue"><i class="bi bi-people"></i></span><small>Students</small><b>{{ students_total }}</b></div></div>
+  <div class="col-6 col-xl-2"><div class="stat v"><span class="stat-ico s-teal"><i class="bi bi-person-badge"></i></span><small>Staff</small><b>{{ staff_total }}</b></div></div>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-4"><div class="card-soft mini"><small>Received this week (since Monday)</small><b>{{ this_week }}</b></div></div>
+  <div class="col-md-4"><div class="card-soft mini"><small>Resolution rate</small><b>{{ counts.resolution_rate|percent }}</b><em>(Resolved + Closed) ÷ Total</em></div></div>
+  <div class="col-md-4"><div class="card-soft mini"><small>Avg. first response</small><b>{{ avg_response|duration }}</b><em>Ticket created → first staff reply</em></div></div>
+</div>
+<div class="row g-4">
+  <div class="col-xl-8"><div class="card-soft"><div class="card-head"><h5>Recent issues</h5><a href="{% url 'staff_issues' %}">View all <i class="bi bi-arrow-right"></i></a></div>
+    {% if recent %}<div class="issue-list">{% include "partials/_issue_rows.html" with issues=recent show_student=True %}</div>
+    {% else %}<div class="empty"><i class="bi bi-inbox"></i><h5>No issues yet</h5><p>Tickets submitted by students will appear here.</p></div>{% endif %}</div></div>
+  <div class="col-xl-4">
+    <div class="card-soft mb-4"><div class="card-head"><h5>By status</h5></div>{% include "staff/_bars.html" with rows=by_status %}</div>
+    <div class="card-soft"><div class="card-head"><h5>By category</h5></div>{% include "staff/_bars.html" with rows=by_category %}</div>
+  </div>
+</div>{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "app_base.html" %}
+{% block title %}My Issues{% endblock %}
+{% block page_title %}My Issues{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>My Issues</h1><p class="muted">Every ticket you have submitted.</p></div>
+  <a class="btn-hiit" href="{% url 'issue_create' %}"><i class="bi bi-plus-lg"></i> Submit New Issue</a></div>
+<div class="card-soft">
+  {% include "partials/_filters.html" %}
+  {% if page.object_list %}<div class="issue-list">{% include "partials/_issue_rows.html" with issues=page.object_list %}</div>{% include "partials/_pagination.html" %}
+  {% elif params.q or params.status or params.category or params.priority %}<div class="empty"><i class="bi bi-search"></i><h5>No matching issues</h5><p>Try different search words or clear the filters.</p><a class="btn-ghost" href="?">Clear filters</a></div>
+  {% else %}<div class="empty"><i class="bi bi-chat-square-heart"></i><h5>No issues yet</h5><p>You have not submitted any issues.</p><a class="btn-hiit" href="{% url 'issue_create' %}">Submit an issue</a></div>{% endif %}
+</div>{% endblock %}

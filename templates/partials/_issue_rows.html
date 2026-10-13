@@ -1,0 +1,15 @@
+{% load support_extras %}
+{% for issue in issues %}
+<a class="issue-row" href="{% url 'issue_detail' issue.ticket_id %}">
+  <span class="issue-ico cat-{{ issue.category }}"><i class="bi {{ issue.category|category_icon }}"></i></span>
+  <span class="issue-main">
+    <strong>{{ issue.title }}</strong>
+    <small>{{ issue.ticket_id }} · {{ issue.get_category_display }}{% if show_student %} · {{ issue.student|display_name }}{% endif %} · {{ issue.created_at|date:"j M Y, g:i A" }}</small>
+  </span>
+  <span class="issue-meta">
+    <span class="badge-pr pr-{{ issue.priority }}">{{ issue.get_priority_display }}</span>
+    {% include "partials/_badges.html" %}
+  </span>
+  <span class="issue-assignee"><i class="bi bi-person"></i> {{ issue.assigned_to|display_name }}</span>
+</a>
+{% endfor %}

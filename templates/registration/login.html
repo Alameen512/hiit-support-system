@@ -1,0 +1,13 @@
+{% extends "registration/_auth_base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block card %}
+<h1>Welcome back</h1><p class="muted">Sign in to your HIIT Support account.</p>
+<form method="post" novalidate data-loading>{% csrf_token %}
+  {% if form.non_field_errors %}<div class="field-error mb-2">{{ form.non_field_errors.0 }}</div>{% endif %}
+  {% include "partials/_field.html" with field=form.username %}
+  {% include "partials/_field.html" with field=form.password %}
+  <input type="hidden" name="next" value="{{ next }}">
+  <button class="btn-hiit w-100 justify-content-center" type="submit">Sign In</button>
+</form>
+<p class="auth-alt">New student? <a href="{% url 'register' %}">Create an account</a></p>
+{% endblock %}

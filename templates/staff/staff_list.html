@@ -1,0 +1,8 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}Staff{% endblock %}
+{% block page_title %}Staff{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Support staff</h1><p class="muted">Staff accounts are managed by administrators in Django Admin.</p></div>{% if is_admin %}<a class="btn-ghost" href="/admin/">Open admin</a>{% endif %}</div>
+<div class="card-soft">{% for m in members %}<div class="person-row"><span class="avatar">{{ m|initials }}</span><span class="issue-main"><strong>{{ m|display_name }}</strong><small>{{ m.profile.get_role_display }}{% if m.profile.department %} · {{ m.profile.department }}{% endif %}</small></span><span class="muted small">{{ m.assigned_total }} assigned · {{ m.assigned_open }} active</span></div>
+{% empty %}<div class="empty"><i class="bi bi-person-badge"></i><h5>No staff accounts</h5></div>{% endfor %}</div>{% endblock %}

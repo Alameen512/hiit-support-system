@@ -1,0 +1,5 @@
+{% if messages %}<div class="flash-wrap" aria-live="polite">
+{% for m in messages %}<div class="flash flash-{{ m.tags }}" role="alert">
+  <i class="bi {% if m.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-triangle-fill{% endif %}"></i>
+  <span>{{ m }}</span><button type="button" class="flash-x" aria-label="Dismiss">&times;</button></div>{% endfor %}
+</div>{% endif %}

@@ -1,0 +1,14 @@
+{% extends "app_base.html" %}
+{% block title %}Submit an issue{% endblock %}
+{% block page_title %}New Issue{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Submit a new issue</h1><p class="muted">Give us the details so the right staff member can help quickly.</p></div></div>
+<div class="card-soft form-card"><form method="post" novalidate data-loading>{% csrf_token %}
+  {% if form.errors %}<div class="flash flash-error mb-3"><i class="bi bi-exclamation-triangle-fill"></i><span>Please correct the highlighted fields.</span></div>{% endif %}
+  {% include "partials/_field.html" with field=form.title %}
+  <div class="row g-0 gx-3"><div class="col-sm-6">{% include "partials/_field.html" with field=form.category %}</div><div class="col-sm-6">{% include "partials/_field.html" with field=form.priority %}</div></div>
+  {% include "partials/_field.html" with field=form.description %}
+  <div class="char-count"><span id="charCount">0</span>/3000</div>
+  {% include "partials/_field.html" with field=form.location %}
+  <div class="d-flex gap-2 flex-wrap"><button class="btn-hiit" type="submit"><i class="bi bi-send"></i> Submit issue</button><a class="btn-ghost" href="{% url 'dashboard' %}">Cancel</a></div>
+</form></div>{% endblock %}

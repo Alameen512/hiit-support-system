@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}{% include "partials/_public_nav.html" %}
+<section class="section"><div class="container" style="max-width:760px"><span class="eyebrow">HIIT Support</span><h1 class="h2">{{ title }}</h1>
+<p class="section-sub text-start">{{ body }}</p><a class="btn-hiit" href="{% url 'landing' %}"><i class="bi bi-arrow-left"></i> Back home</a></div></section>
+{% include "partials/_footer.html" %}{% endblock %}

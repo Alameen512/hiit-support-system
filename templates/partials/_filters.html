@@ -1,0 +1,16 @@
+<form method="get" class="filters">
+  <div class="search"><i class="bi bi-search"></i>
+    <input type="search" name="q" value="{{ params.q }}" placeholder="Search title, ticket ID or description" aria-label="Search"></div>
+  <select name="status" aria-label="Status"><option value="">All statuses</option>
+    {% for v, l in statuses %}<option value="{{ v }}" {% if params.status == v %}selected{% endif %}>{{ l }}</option>{% endfor %}
+    {% if staff_view %}<option value="done" {% if params.status == 'done' %}selected{% endif %}>Resolved + Closed</option>{% endif %}</select>
+  <select name="category" aria-label="Category"><option value="">All categories</option>
+    {% for v, l in categories %}<option value="{{ v }}" {% if params.category == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+  <select name="priority" aria-label="Priority"><option value="">All priorities</option>
+    {% for v, l in priorities %}<option value="{{ v }}" {% if params.priority == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+  {% if staff_view %}<select name="assigned" aria-label="Assignee"><option value="">Anyone</option>
+    <option value="unassigned" {% if params.assigned == 'unassigned' %}selected{% endif %}>Unassigned</option>
+    {% for s in staff_members %}<option value="{{ s.pk }}" {% if params.assigned == s.pk|stringformat:"s" %}selected{% endif %}>{% firstof s.get_full_name s.username %}</option>{% endfor %}</select>{% endif %}
+  <button class="btn-hiit" type="submit"><i class="bi bi-funnel"></i> Filter</button>
+  {% if params.q or params.status or params.category or params.priority or params.assigned %}<a class="btn-ghost" href="?">Clear</a>{% endif %}
+</form>

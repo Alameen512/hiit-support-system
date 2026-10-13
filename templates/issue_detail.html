@@ -1,0 +1,53 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}{{ issue.ticket_id }}{% endblock %}
+{% block page_title %}Issue {{ issue.ticket_id }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% if is_staff_member %}{% url 'staff_issues' %}{% else %}{% url 'my_issues' %}{% endif %}"><i class="bi bi-arrow-left"></i> Back to {% if is_staff_member %}all issues{% else %}my issues{% endif %}</a>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card-soft">
+      <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+        <div class="d-flex gap-3"><span class="issue-ico big cat-{{ issue.category }}"><i class="bi {{ issue.category|category_icon }}"></i></span>
+          <div><h1 class="h4 mb-1">{{ issue.title }}</h1><small class="muted">{{ issue.ticket_id }} · {{ issue.get_category_display }}{% if issue.location %} · {{ issue.location }}{% endif %}</small></div></div>
+        {% include "partials/_badges.html" %}
+      </div>
+      <p class="issue-desc">{{ issue.description|linebreaksbr }}</p>
+      <dl class="meta-grid">
+        <div><dt>Priority</dt><dd><span class="badge-pr pr-{{ issue.priority }}">{{ issue.get_priority_display }}</span></dd></div>
+        <div><dt>Submitted</dt><dd>{{ issue.created_at|date:"j M Y, g:i A" }}</dd></div>
+        <div><dt>Assigned to</dt><dd>{{ issue.assigned_to|display_name }}</dd></div>
+        <div><dt>Last updated</dt><dd>{{ issue.updated_at|date:"j M Y, g:i A" }}</dd></div>
+        {% if is_staff_member %}<div><dt>Student</dt><dd>{{ issue.student|display_name }}</dd></div>{% endif %}
+        {% if issue.resolved_at %}<div><dt>Resolved</dt><dd>{{ issue.resolved_at|date:"j M Y, g:i A" }}</dd></div>{% endif %}
+      </dl>
+    </div>
+
+    <div class="card-soft mt-4"><div class="card-head"><h5>Staff responses</h5></div>
+      {% for r in responses %}<div class="response"><span class="avatar">{{ r.staff|initials }}</span><div><div class="response-top"><b>{{ r.staff|display_name }}</b><time>{{ r.created_at|date:"j M Y, g:i A" }}</time></div><p>{{ r.message|linebreaksbr }}</p></div></div>
+      {% empty %}<div class="empty small"><i class="bi bi-chat-dots"></i><p>No staff response yet. You'll see replies here.</p></div>{% endfor %}
+      {% if is_staff_member and not issue.is_closed %}
+      <form method="post" action="{% url 'issue_action' issue.ticket_id 'respond' %}" class="mt-3" data-loading>{% csrf_token %}
+        <div class="field">{{ response_form.message }}</div>
+        <button class="btn-hiit" type="submit"><i class="bi bi-send"></i> Send response</button></form>{% endif %}
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    {% if is_staff_member %}
+    <div class="card-soft mb-4"><div class="card-head"><h5>Manage ticket</h5></div>
+      {% if issue.is_closed %}<p class="muted small mb-0"><i class="bi bi-lock"></i> This issue is closed and read-only.</p>{% else %}
+      <form method="post" action="{% url 'issue_action' issue.ticket_id 'assign' %}" class="manage" data-loading>{% csrf_token %}<label>Assign to</label><div class="d-flex gap-2">{{ assign_form.assignee }}<button class="btn-hiit sm" type="submit">Save</button></div></form>
+      <form method="post" action="{% url 'issue_action' issue.ticket_id 'priority' %}" class="manage" data-loading>{% csrf_token %}<label>Priority</label><div class="d-flex gap-2"><select name="priority">{% for v, l in priorities %}<option value="{{ v }}" {% if v == issue.priority %}selected{% endif %}>{{ l }}</option>{% endfor %}</select><button class="btn-hiit sm" type="submit">Save</button></div></form>
+      <form method="post" action="{% url 'issue_action' issue.ticket_id 'status' %}" class="manage" data-loading>{% csrf_token %}<label>Move to status</label>
+        {% if next_statuses %}<div class="d-flex gap-2"><select name="status">{% for v, l in next_statuses %}<option value="{{ v }}">{{ l }}</option>{% endfor %}</select><button class="btn-hiit sm" type="submit">Update</button></div>{% endif %}</form>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="card-soft"><div class="card-head"><h5>Activity</h5></div>
+      <ol class="timeline compact">
+        {% for a in activities %}<li><span class="tl-dot"><i class="bi {{ a.event_type|event_icon }}"></i></span><div><b>{{ a.get_event_type_display }}</b><small>{{ a.description }}</small></div><time>{{ a.created_at|date:"j M, g:i A" }}</time></li>{% endfor %}
+      </ol>
+    </div>
+  </div>
+</div>{% endblock %}

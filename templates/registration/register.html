@@ -1,0 +1,17 @@
+{% extends "registration/_auth_base.html" %}
+{% block title %}Create account{% endblock %}
+{% block card %}
+<h1>Create your account</h1><p class="muted">Student accounts only. Staff accounts are created by an administrator.</p>
+<form method="post" novalidate data-loading>{% csrf_token %}
+  <div class="row g-0 gx-3"><div class="col-sm-6">{% include "partials/_field.html" with field=form.first_name %}</div>
+  <div class="col-sm-6">{% include "partials/_field.html" with field=form.last_name %}</div></div>
+  {% include "partials/_field.html" with field=form.username %}
+  {% include "partials/_field.html" with field=form.email %}
+  {% include "partials/_field.html" with field=form.matric_number %}
+  {% include "partials/_field.html" with field=form.phone %}
+  {% include "partials/_field.html" with field=form.password1 %}
+  {% include "partials/_field.html" with field=form.password2 %}
+  <button class="btn-hiit w-100 justify-content-center" type="submit">Create account</button>
+</form>
+<p class="auth-alt">Already registered? <a href="{% url 'login' %}">Sign in</a></p>
+{% endblock %}

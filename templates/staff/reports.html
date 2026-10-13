@@ -1,0 +1,19 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Reports{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Reports</h1><p class="muted">Live figures calculated from the database.</p></div></div>
+<div class="row g-3 mb-4">
+  <div class="col-md-3 col-6"><div class="card-soft mini"><small>Total issues</small><b>{{ counts.total }}</b></div></div>
+  <div class="col-md-3 col-6"><div class="card-soft mini"><small>Resolution rate</small><b>{{ counts.resolution_rate|percent }}</b><em>(Resolved + Closed) ÷ Total</em></div></div>
+  <div class="col-md-3 col-6"><div class="card-soft mini"><small>Avg. first response</small><b>{{ avg_response|duration }}</b><em>Created → first staff reply</em></div></div>
+  <div class="col-md-3 col-6"><div class="card-soft mini"><small>Avg. resolution time</small><b>{{ avg_resolution|duration }}</b><em>Created → resolved</em></div></div>
+</div>
+<div class="row g-4">
+  <div class="col-lg-6"><div class="card-soft"><div class="card-head"><h5>Issues per day (last 7 days)</h5></div>
+    <div class="day-chart">{% for d, n, pct in days %}<div><b>{{ n }}</b><span style="height:{{ pct }}%"></span><small>{{ d|date:"D" }}</small></div>{% endfor %}</div></div></div>
+  <div class="col-lg-6"><div class="card-soft"><div class="card-head"><h5>By priority</h5></div>{% include "staff/_bars.html" with rows=by_priority %}</div></div>
+  <div class="col-lg-6"><div class="card-soft"><div class="card-head"><h5>By status</h5></div>{% include "staff/_bars.html" with rows=by_status %}</div></div>
+  <div class="col-lg-6"><div class="card-soft"><div class="card-head"><h5>By category</h5></div>{% include "staff/_bars.html" with rows=by_category %}</div></div>
+</div>{% endblock %}

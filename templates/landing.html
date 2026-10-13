@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Get support. Stay on track.{% endblock %}
+{% block body %}
+{% include "partials/_public_nav.html" %}
+{% include "partials/_messages.html" %}
+
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="hero-badge"><i class="bi bi-circle-fill"></i> HIIT PLC • Student Support System</span>
+        <h1>Get support.<br><span>Stay on track.</span></h1>
+        <p class="lead">HIIT Support makes it easy for students to report issues, track progress and get help from the right staff — all in one place.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn-hiit btn-lg-hiit" href="{% if user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'register' %}{% endif %}">Get Started <i class="bi bi-arrow-right"></i></a>
+          <a class="btn-outline-light-hiit" href="#how"><i class="bi bi-play-circle"></i> How it works</a>
+        </div>
+        <ul class="trust"><li><i class="bi bi-check-circle-fill"></i> Fast</li><li><i class="bi bi-check-circle-fill"></i> Simple</li><li><i class="bi bi-check-circle-fill"></i> Reliable</li></ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="preview-card" aria-label="Sample dashboard preview">
+          <div class="pv-head"><span class="logo"><span class="logo-mark sm">H</span><strong>HIIT Support</strong></span><span class="sample-chip">Sample preview</span></div>
+          <h6>Support Dashboard</h6><p class="muted small">Here's what's happening with your issues.</p>
+          <div class="row g-2">
+            <div class="col-6"><div class="pv-stat"><i class="bi bi-exclamation-circle c-red"></i><div><small>Open Issues</small><b>12</b></div></div></div>
+            <div class="col-6"><div class="pv-stat"><i class="bi bi-arrow-repeat c-blue"></i><div><small>In Progress</small><b>8</b></div></div></div>
+            <div class="col-6"><div class="pv-stat"><i class="bi bi-check-circle c-teal"></i><div><small>Resolved</small><b>34</b></div></div></div>
+            <div class="col-6"><div class="pv-stat"><i class="bi bi-clock c-blue"></i><div><small>Avg. Response</small><b>4h 32m</b></div></div></div>
+          </div>
+          <h6 class="mt-3">Recent Issues</h6>
+          <div class="pv-row"><i class="bi bi-pc-display"></i><span><b>Computer not working</b><small>IT Lab 2 · 2 hours ago</small></span><em class="badge-status st-in_progress">In Progress</em></div>
+          <div class="pv-row"><i class="bi bi-journal-check"></i><span><b>Course registration issue</b><small>Academics · 5 hours ago</small></span><em class="badge-status st-open">Open</em></div>
+          <div class="pv-row"><i class="bi bi-award"></i><span><b>Certificate not received</b><small>Admin · 1 day ago</small></span><em class="badge-status st-resolved">Resolved</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container text-center">
+    <span class="eyebrow">Why HIIT Support</span>
+    <h2>Everything you need,<br>all in one place.</h2>
+    <p class="section-sub">Our support system is built to make issue reporting and resolution simple, transparent and efficient for every HIIT student.</p>
+    <div class="row g-3 mt-3 text-center">
+      <div class="col-6 col-lg-3"><div class="feature"><span class="f-ico f-blue"><i class="bi bi-send"></i></span><h5>Report an Issue</h5><p>Quickly submit your concern with a clear category and description.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="feature"><span class="f-ico f-teal"><i class="bi bi-eye"></i></span><h5>Track Progress</h5><p>See live updates on your issue status and assigned staff.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="feature"><span class="f-ico f-blue"><i class="bi bi-chat-dots"></i></span><h5>Staff Responses</h5><p>Get helpful responses and solutions from the right team members.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="feature"><span class="f-ico f-teal"><i class="bi bi-lightning-charge"></i></span><h5>Faster Resolution</h5><p>Stay informed and get your issues resolved more quickly.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="how">
+  <div class="how-box text-center">
+    <span class="eyebrow">Simple steps</span><h2>How it works</h2><p class="section-sub">Get help in just three simple steps.</p>
+    <div class="row g-4 mt-2 align-items-start">
+      <div class="col-md-4"><div class="step"><span class="step-n">1</span><span class="step-ico"><i class="bi bi-file-earmark-text"></i></span><h5>Submit your issue</h5><p>Fill out a short form with your issue details and category.</p></div></div>
+      <div class="col-md-4"><div class="step"><span class="step-n">2</span><span class="step-ico"><i class="bi bi-stopwatch"></i></span><h5>Track the progress</h5><p>Check the status of your issue at any time.</p></div></div>
+      <div class="col-md-4"><div class="step"><span class="step-n">3</span><span class="step-ico"><i class="bi bi-check2-circle"></i></span><h5>Get it resolved</h5><p>Receive a response and resolution from the staff team.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container"><div class="row align-items-center g-5">
+    <div class="col-lg-5">
+      <span class="eyebrow">Student experience</span>
+      <h2>Your support ticket,<br>from start to finish.</h2>
+      <p class="section-sub text-start">Stay informed at every stage with clear updates, staff responses and a complete history of your issue.</p>
+      <ul class="checks"><li><i class="bi bi-check-circle-fill"></i> Real-time status updates</li><li><i class="bi bi-check-circle-fill"></i> Staff assignment details</li><li><i class="bi bi-check-circle-fill"></i> Full response history</li></ul>
+    </div>
+    <div class="col-lg-7"><div class="card-soft">
+      <span class="sample-chip mb-2">Sample ticket</span>
+      <div class="d-flex justify-content-between align-items-start"><div><h5 class="mb-0">Computer not working</h5><small class="muted">IT Lab 2 · 2 hours ago</small></div><span class="badge-status st-in_progress">In Progress</span></div>
+      <ol class="timeline mt-3">
+        <li><span class="tl-dot"><i class="bi bi-send"></i></span><div><b>Issue submitted</b><small>You submitted this issue.</small></div><time>2:14 PM</time></li>
+        <li><span class="tl-dot"><i class="bi bi-person-check"></i></span><div><b>Assigned to staff</b><small>Assigned to: John Martins</small></div><time>3:02 PM</time></li>
+        <li><span class="tl-dot"><i class="bi bi-play-circle"></i></span><div><b>Work in progress</b><small>Technician is working on it.</small></div><time>3:18 PM</time></li>
+        <li><span class="tl-dot"><i class="bi bi-chat-dots"></i></span><div><b>Staff response</b><small>The technician is checking the power supply.</small></div><time>4:05 PM</time></li>
+        <li class="pending"><span class="tl-dot"><i class="bi bi-check-circle"></i></span><div><b>Resolved</b><small>Waiting for resolution.</small></div><time>—</time></li>
+      </ol>
+    </div></div>
+  </div></div>
+</section>
+
+<section class="section pt-0">
+  <div class="container"><div class="row align-items-center g-5 flex-lg-row-reverse">
+    <div class="col-lg-5">
+      <span class="eyebrow">For staff</span>
+      <h2>Powerful tools<br>for our support team.</h2>
+      <p class="section-sub text-start">Manage issues, assign staff, update statuses and keep everything organised with a clean dashboard.</p>
+      <ul class="checks"><li><i class="bi bi-check-circle-fill"></i> Issue management &amp; filtering</li><li><i class="bi bi-check-circle-fill"></i> Staff assignments</li><li><i class="bi bi-check-circle-fill"></i> Status updates</li><li><i class="bi bi-check-circle-fill"></i> Student communication</li><li><i class="bi bi-check-circle-fill"></i> Statistics &amp; reports</li></ul>
+    </div>
+    <div class="col-lg-7"><div class="staff-preview"><span class="sample-chip">Sample preview</span>
+      <div class="sp-side"><span class="logo logo-light"><span class="logo-mark sm">H</span><strong>HIIT Support</strong></span><i class="active">Dashboard</i><i>All Issues</i><i>Students</i><i>Staff</i><i>Reports</i></div>
+      <div class="sp-main"><h6>Staff Dashboard</h6>
+        <div class="row g-2 mb-2"><div class="col-3"><div class="pv-stat v"><small>Total</small><b>62</b></div></div><div class="col-3"><div class="pv-stat v"><small>Open</small><b>12</b></div></div><div class="col-3"><div class="pv-stat v"><small>Progress</small><b>8</b></div></div><div class="col-3"><div class="pv-stat v"><small>Resolved</small><b>42</b></div></div></div>
+        <div class="pv-row"><span><b>Course registration issue</b></span><em class="badge-status st-open">Open</em></div>
+        <div class="pv-row"><span><b>Laptop not working</b></span><em class="badge-status st-in_progress">In Progress</em></div>
+        <div class="pv-row"><span><b>Certificate not received</b></span><em class="badge-status st-resolved">Resolved</em></div>
+      </div></div></div>
+  </div></div>
+</section>
+
+<section class="container"><div class="cta">
+  <div><span class="eyebrow light">Join HIIT Support</span><h2>Need help? We're here.</h2><p>Report your issue today and get the support you need to keep moving forward at HIIT.</p>
+    <div class="d-flex gap-2 flex-wrap"><a class="btn-light-hiit" href="{% url 'register' %}">Get Started <i class="bi bi-arrow-right"></i></a><a class="btn-outline-light-hiit" href="{% url 'login' %}"><i class="bi bi-person"></i> Sign In</a></div></div>
+  <i class="bi bi-chat-square-text-fill cta-ico d-none d-md-block"></i>
+</div></section>
+
+{% include "partials/_footer.html" %}
+{% endblock %}

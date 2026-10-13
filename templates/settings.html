@@ -1,0 +1,12 @@
+{% extends "app_base.html" %}
+{% block title %}Settings{% endblock %}
+{% block page_title %}Settings{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Settings</h1><p class="muted">Update your contact details. Your role can only be changed by an administrator.</p></div></div>
+<div class="card-soft form-card"><form method="post" novalidate data-loading>{% csrf_token %}
+  <div class="row g-0 gx-3"><div class="col-sm-6">{% include "partials/_field.html" with field=form.first_name %}</div><div class="col-sm-6">{% include "partials/_field.html" with field=form.last_name %}</div></div>
+  {% include "partials/_field.html" with field=form.email %}
+  {% include "partials/_field.html" with field=form.phone %}
+  {% if not is_staff_member %}{% include "partials/_field.html" with field=form.matric_number %}{% endif %}
+  <div class="d-flex gap-2 flex-wrap"><button class="btn-hiit" type="submit">Save changes</button><a class="btn-ghost" href="{% url 'password_change' %}"><i class="bi bi-key"></i> Change password</a></div>
+</form></div>{% endblock %}

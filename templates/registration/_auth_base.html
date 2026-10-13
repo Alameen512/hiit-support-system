@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body_class %}auth-body{% endblock %}
+{% block body %}
+<div class="auth-wrap">
+  <div class="auth-side d-none d-lg-flex">
+    <a href="{% url 'landing' %}" class="logo logo-light"><span class="logo-mark">H</span><span class="logo-text"><strong>HIIT Support</strong><small>Student Support &amp; Issue Tracking</small></span></a>
+    <div><h2>Get support.<br><span>Stay on track.</span></h2><p>Report issues, follow their progress and hear back from the right HIIT staff — all in one place.</p></div>
+    <small>&copy; {% now "Y" %} HIIT Plc</small>
+  </div>
+  <main class="auth-main">
+    <a href="{% url 'landing' %}" class="logo-link d-lg-none mb-4 d-inline-block">{% include "partials/_logo.html" %}</a>
+    {% include "partials/_messages.html" %}
+    <div class="auth-card">{% block card %}{% endblock %}</div>
+  </main>
+</div>
+{% endblock %}

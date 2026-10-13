@@ -1,0 +1,20 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Hello, {{ user.first_name|default:user.username }} 👋</h1><p class="muted">Here's what's happening with your issues.</p></div>
+  <a class="btn-hiit" href="{% url 'issue_create' %}"><i class="bi bi-plus-lg"></i> Submit New Issue</a></div>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-xl-3"><div class="stat"><span class="stat-ico s-blue"><i class="bi bi-inboxes"></i></span><div><small>Total Issues</small><b>{{ counts.total }}</b></div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat"><span class="stat-ico s-amber"><i class="bi bi-exclamation-circle"></i></span><div><small>Open Issues</small><b>{{ counts.open }}</b></div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat"><span class="stat-ico s-blue"><i class="bi bi-arrow-repeat"></i></span><div><small>In Progress</small><b>{{ counts.in_progress }}</b></div></div></div>
+  <div class="col-6 col-xl-3"><div class="stat"><span class="stat-ico s-teal"><i class="bi bi-check-circle"></i></span><div><small>Resolved</small><b>{{ counts.resolved }}</b></div></div></div>
+</div>
+<div class="card-soft">
+  <div class="card-head"><h5>Recent issues</h5>{% if recent %}<a href="{% url 'my_issues' %}">View all <i class="bi bi-arrow-right"></i></a>{% endif %}</div>
+  {% if recent %}<div class="issue-list">{% include "partials/_issue_rows.html" with issues=recent %}</div>
+  {% else %}<div class="empty"><i class="bi bi-chat-square-heart"></i><h5>No issues yet</h5><p>When something goes wrong, tell us here and follow the fix from start to finish.</p>
+    <a class="btn-hiit" href="{% url 'issue_create' %}">Submit your first issue</a></div>{% endif %}
+</div>
+{% endblock %}

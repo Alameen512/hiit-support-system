@@ -1,0 +1,10 @@
+{% extends "app_base.html" %}
+{% load support_extras %}
+{% block title %}Students{% endblock %}
+{% block page_title %}Students{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Students</h1><p class="muted">Registered student accounts.</p></div></div>
+<div class="card-soft"><form method="get" class="filters"><div class="search"><i class="bi bi-search"></i><input type="search" name="q" value="{{ params.q }}" placeholder="Search name, username, email or matric no."></div><button class="btn-hiit" type="submit">Search</button></form>
+{% for s in page.object_list %}<div class="person-row"><span class="avatar">{{ s|initials }}</span><span class="issue-main"><strong>{{ s|display_name }}</strong><small>{{ s.email }}{% if s.profile.matric_number %} · {{ s.profile.matric_number }}{% endif %}</small></span><span class="muted small">{{ s.issue_total }} issue{{ s.issue_total|pluralize }} · {{ s.issue_open }} active</span></div>
+{% empty %}<div class="empty"><i class="bi bi-people"></i><h5>No students found</h5></div>{% endfor %}
+{% include "partials/_pagination.html" %}</div>{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "app_base.html" %}
+{% block title %}Issues{% endblock %}
+{% block page_title %}Issues{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Support issues</h1><p class="muted">Search, filter and open any ticket.</p></div></div>
+<div class="card-soft">
+  {% include "partials/_filters.html" with staff_view=True %}
+  {% if page.object_list %}<div class="issue-list">{% include "partials/_issue_rows.html" with issues=page.object_list show_student=True %}</div>{% include "partials/_pagination.html" %}
+  {% else %}<div class="empty"><i class="bi bi-search"></i><h5>No issues found</h5><p>Nothing matches these filters yet.</p><a class="btn-ghost" href="{% url 'staff_issues' %}">Reset</a></div>{% endif %}
+</div>{% endblock %}
