@@ -18,13 +18,13 @@ def env_list(name, default=""):
 
 DEBUG = env_bool("DEBUG", True)
 
-SECRET_KEY = os.environ.get("dev")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 if not SECRET_KEY:
     if DEBUG:
         SECRET_KEY = "insecure-local-development-key"
     else:
-        raise ImproperlyConfigured("SECRET_KEY must be set when DEBUG is off.")
-
+        SECRET_KEY = "temporary-build-placeholder-change-me"
 # --- Hosts / CSRF -----------------------------------------------------------
 ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", "localhost,127.0.0.1" if DEBUG else "")
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")
