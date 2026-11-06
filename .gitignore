@@ -14,3 +14,13 @@ staticfiles/
 *.log
 .idea/
 .vscode/
+# Python virtual environments
+.venv/
+.venv312/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
